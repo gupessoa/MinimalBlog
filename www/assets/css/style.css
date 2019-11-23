@@ -1,3 +1,5 @@
+/* Fontes Adicionais */
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
 /* Estilos gerais */
 body{
     background: url('../img/bg.png') repeat;
@@ -9,7 +11,8 @@ input, textarea{
     border-width:1px; 
     background-color:#ffffff; 
     border-color:#a6a4a6; 
-    font-family:sans-serif;  
+    font-family:sans-serif;
+    display: block;  
 } 
 input:focus { 
     outline:none; 
@@ -34,6 +37,14 @@ section div.container h1{
 section div.container h2{
     font-size: 1rem;
     font-weight: normal;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.1rem;
+    text-align: center;
+}
+section div.postContainer h2{
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Raleway', sans-serif;
     letter-spacing: 0.1rem;
     text-align: center;
 }
@@ -261,6 +272,25 @@ header h2{
     line-height: 1.3rem;
     text-align: justify;
 }
+.hashtags{
+    margin:20px 0 10px 0;    
+}
+.hashtags h4{
+    font-size: 1.2em;
+    font-family: sans-serif;
+    font-weight: normal;
+    margin: 0;
+}
+div.text p.autor{
+    margin: 30px 0;
+    width: 100%;
+    text-align: right;
+    font-family: 'Dancing Script', cursive;
+    font-size: 2em;
+}
+.hashtags a{
+    font-size: 0.9em;
+}
 .show{
     padding: 20px 0;
     text-align: center;
@@ -392,4 +422,17 @@ fieldset.contactForm legend{
     height: 100px;
     border: 0.5px solid#cecece;
     border-radius: 2px;
+}
+@-moz-document url-prefix(){
+    fieldset.contactForm {
+        display: flex;
+        flex-direction: column;
+    }
+    fieldset.contactForm legend {
+        font-size: 1.9em;
+        padding: 0 20px;
+        text-align: center;
+        margin: 30px auto;
+        font-family: sans-serif;
+    }
 }

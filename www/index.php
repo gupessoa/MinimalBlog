@@ -121,6 +121,11 @@
 									que estão dentro dele não estão por acaso. São necessárias.</p>
 								<p>Nem sempre tenho as melhores atitudes, nem sempre faço o que esta certo, 
 										mas o que sai de mim é genuíno.</p>
+								<p class="autor">Gustavo Pessoa</p>
+								<div class="hashtags">
+									<h4>Hashtag</h4>
+									<p><a href="">#GustavoPessoa</a> <a href="">#MeusMomentos</a> <a href="">#MeusPensamentos</a> <a href="">#ParteDeMim</a> <a href="">#Trintei</a> <a href="">#MeuMundo</a></p>
+								</div>
 							</div>
 							<div class="show">
 								<a href="" class="mostrarMais">Mostrar Mais</a>

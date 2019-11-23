@@ -29,9 +29,12 @@
 	$headers .= "X-Priority:3\n";
 	$headers .="X-Mailer: PHP/".phpversion();
 
-	if(!mail($para, $assunto, $corpo, $headers ,"-r".$email)){ // Se for Postfix
+	if(mail($para, $assunto, $corpo, $headers ,"-r".$email)){ // Se for Postfix
+		echo "<script>alert('Usuário inserido com Sucesso!');</script>";
+	}else{
 		$headers .= "Return-Path: " . $email . $quebra_linha; // Se "não for Postfix"
 		mail($para, $assunto, $corpo, $headers );
+		echo"Usuário inserido com sucesso!";
 	}
 	}
 	$content = file_get_contents("php://input");
@@ -129,11 +132,11 @@
 					 <form method="post">
 						<fieldset class="contactForm">
 	 						<legend>Contate-nos</legend>
-							<input type="text" name="nome" id="nomeMsg" placeholder="Nome">
-							<input type="email" name="email" id="emailMsg"placeholder="E-mail" >
-							<input type="tel" name="tel" id="tel" pattern="[0-9]{11}" placeholder="Telefone" >
-							<input type="text" name="assunto" id="assunto" placeholder="Assunto" >
-							<textarea name="msg" id="msg" placeholder="Digite sua Mensagem"></textarea>
+							<input type="text" name="nome" id="nomeMsg" placeholder="Nome" required>
+							<input type="email" name="email" id="emailMsg" placeholder="E-mail" required>
+							<input type="tel" name="tel" id="tel" pattern="[0-9]{11}" placeholder="Telefone" required>
+							<input type="text" name="assunto" id="assunto" placeholder="Assunto" required>
+							<textarea name="msg" id="msg" placeholder="Digite sua Mensagem" required></textarea>
 							<div>
 								<input type="submit" value="Enviar">
 							</div>
