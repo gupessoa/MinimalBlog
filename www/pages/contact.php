@@ -1,22 +1,50 @@
 <?php
-	 $pdo;
-	 // Criando a Conexão de BD'
-	 try{
-	 $pdo = new PDO("mysql:dbname=tombo;host=localhost", "root", "");
-	 }catch(PDOException $e){
-	 echo "Erro: "+$e->getMessage();
-	 }
-	 $content = file_get_contents("php://input");
-	 //tranformamos o conteudo recebido em JSON em um array php
-	 $decoded = json_decode($content, true);
-	 //pegamos as informações e atribuindo elas as variaveis   
-	 $email = $decoded['email'];
-	 if(isset($email) && !empty($email)){
+	$pdo;
+	// Criando a Conexão de BD'
+	try{
+	$pdo = new PDO("mysql:dbname=tombo;host=localhost", "root", "");
+	}catch(PDOException $e){
+	echo "Erro: "+$e->getMessage();
+	}
+
+	//pegando as informações de email 
+	if(isset($_POST["email"]) && !empty($_POST["email"])){
+		
+	$nome = addslashes($_POST['nome']);
+	$email = addslashes($_POST['email']);
+	$telefone = addslashes($_POST['tel']);
+	$mensagem = addslashes($_POST['msg']);
+	$assunto = addslashes($_POST['assunto']);
+	$data_envio = date('d/m/Y');
+	$hora_envio = date('H:i:s');
+
+	$para = "gustavo.pessoa@codnome.com.br";
+	$corpo = "Nome: ".$nome."<br> Email: ".$email."<br>Telefone: ".$telefone."<br>Data: ".$data_envio." ás ".$hora_envio."<hr><strong>".$assunto."</strong><br>".$mensagem;
+	$headers  = "MIME-Version: 1.1\n";
+	$headers .= "Content-type: text/html; charset=UTF-8\n";
+	$headers .= "From: gustavo.pessoa@condome.com.br" . "\n";
+	$headers .="Reply-To: ".$email."\n";
+	$headers .="Data: ".$data_envio."\n";
+	$headers .= "Return-Path: ".$nome." <gustavo.pessoa@codnome.com.br>\n";
+	$headers .= "X-Priority:3\n";
+	$headers .="X-Mailer: PHP/".phpversion();
+
+	if(!mail($para, $assunto, $corpo, $headers ,"-r".$email)){ // Se for Postfix
+		$headers .= "Return-Path: " . $email . $quebra_linha; // Se "não for Postfix"
+		mail($para, $assunto, $corpo, $headers );
+	}
+	}
+	$content = file_get_contents("php://input");
+	//tranformamos o conteudo recebido em JSON em um array php
+	$decoded = json_decode($content, true);
+	//pegamos as informações e atribuindo elas as variaveis   
+	$email = $decoded['email'];
+	if(isset($email) && !empty($email)){
 		//Alterando o cabeçalho para não gerar cache do resultado
 		header('Cache-Control: no-cache, must-revalidate'); 
 		//Alterando o cabeçalho para que o retorno seja do tipo JSON
 		header('Content-Type: application/json; charset=utf-8');
-	    //pegamos as informações e atribuindo elas as variaveis   
+		//pegamos as informações e atribuindo elas as variaveis   
 		$senha = md5($decoded['senha']); 
 		//fazendo os procedimentos no banco de dados
 		$query = "SELECT * FROM users WHERE email = ? AND senha = ?";
@@ -31,8 +59,7 @@
 			echo json_encode(array("status"=>"nok"));
 			exit;
 		}
-	 }
-	 
+	}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -96,7 +123,24 @@
 		<!-- Declaração uma sessão do site -->
 		<section>
             <div class="container contact">
-
+				<h1>Contato</h2>
+				<h2>Dúvidas? Sugestões? Quer bater um papo?<br>Mande uma mensagem para nós! Prometemos responder.<br> <span>&#128521;</span> </h2>
+				<div>
+					 <form method="post">
+						<fieldset class="contactForm">
+	 						<legend>Contate-nos</legend>
+							<input type="text" name="nome" id="nomeMsg" placeholder="Nome">
+							<input type="email" name="email" id="emailMsg"placeholder="E-mail" >
+							<input type="tel" name="tel" id="tel" pattern="[0-9]{11}" placeholder="Telefone" >
+							<input type="text" name="assunto" id="assunto" placeholder="Assunto" >
+							<textarea name="msg" id="msg" placeholder="Digite sua Mensagem"></textarea>
+							<div>
+								<input type="submit" value="Enviar">
+							</div>
+	 						
+						</fieldset>
+					 </form>
+				</div>
             </div>
         </section>
         <aside>
