@@ -15,46 +15,27 @@ if(btn){
     }
     mostrarMais(btn, div);
 }
-// Modal
-function modal(div, botao, close){
-    // Get the modal
-    let modal = div;
-  
-    // Get the button that opens the modal
-    let btn = botao;
-  
-    // Get the <span> element that closes the modal
-    let span = close;
-  
-    // When the user clicks the button, open the modal 
-    btn.addEventListener("click",function(){
-        modal.style.display="block";
-    });
-    // When the user clicks on <span> (x), close the modal
-    span.addEventListener("click",function(){
-        modal.style.display="none";
-    });
-    // When the user clicks anywhere outside of the modal, close it
-    window.addEventListener("click", function (event) {
-        if(event.target == modal){
-            modal.style.display="none";
-        }
-    });
-  }
 
-var div = document.querySelector(".modal");
-var botao = document.querySelector(".lgAdmin");
-var btnClose = document.querySelector(".closeModal");
+function toggledisplay(elementSelector){
+    (function(style) {
+        style.display = style.display === 'block' ? '' : 'block';
+    })(document.querySelector(elementSelector).style);
+}
 
-modal(div, botao, btnClose);
-
+//mostrar formulário de login
+let formLogin = document.querySelector(".lgAdmin");
+formLogin.addEventListener("click", (event)=>{
+    event.preventDefault();
+    toggledisplay(".login");
+});
 //Login
 function login(btn){
     btn.addEventListener("click", function(event){
         event.preventDefault();
         let email = document.querySelector("#email");
         let senha = document.querySelector("#senha");
-        fetch("http://localhost/MinimalBlog/www/pages/login.php",{
+        let url = document.URL;
+        fetch(url,{
             method:"POST",
             headers:{"Content-Type":"application/json; charset=utf-8"},
             body: JSON.stringify({
@@ -65,9 +46,9 @@ function login(btn){
         .then(response => response.json())
         .then(json =>{
             if(json[0] == "ok"){
-                console.log("Usuário Logado com sucesso!!!");
+                window.location="http://localhost/MinimalBlog/www/adm/index.html"
             }else{
-                console.log("Usuário Não encontrado!!!");
+                alert("Usuário não encontrado");
             }
         });
     });

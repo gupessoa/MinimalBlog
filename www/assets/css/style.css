@@ -15,6 +15,10 @@ input:focus {
     outline:none; 
     box-shadow: 0px 0px 3px 0px rgba(0, 119, 255, 0.5);
 }
+.warning{
+    color: red;
+    margin: 5px;
+}
 section img{
     border: 1px solid gray;
     padding: 10px;
@@ -122,6 +126,59 @@ section div.container h3{
     color: #f44336 !important;
     font-weight: bold;
 }
+.menu ul li{
+    position: relative;
+}
+.login{
+    position: absolute;
+    right: 22px;
+    background-color: rgba(234,234,234,1);
+    width: 350px;
+    height: 230px;
+    display: none;
+    transition: all 1s ease-in-out;
+    z-index: 20;
+}
+/* .menu li:hover .login{
+    display: block;
+} */
+/* .login{
+    width: 300px;
+} */
+.login fieldset{
+    margin: 20px;
+}
+.login fieldset legend{
+    text-align: center;
+    font-size: 1.5em;
+    font-family: 'Raleway', sans-serif;
+    padding: 0 10px;
+}
+.login input[type="email"]{
+    margin: 20px auto 0 auto;
+    display: block;
+    width: 90%;
+}
+.login input[type="password"]{
+    margin:5px auto 20px auto;
+    display: block;
+    width: 90%;
+}
+.login input[type="submit"]{
+    display: block;
+    float: right;
+    margin-right: 7px;
+    background-color: lightgray;
+    border: none;
+    padding: 10px 20px;
+}
+.login input[type="submit"]:hover{
+    background-color: #f44336;
+    color: white;
+}
+/* .exibr{
+    display: block !important;
+} */
 header{
     text-align: center;
     margin-bottom: 70px;
@@ -244,37 +301,6 @@ main+footer{
     text-align: center;
     padding: 10px;
     font-family: 'Montserrat', sans-serif;
-}
-.modalLogin{
-    width: 300px;
-}
-.modalLogin fieldset legend{
-    text-align: center;
-    font-size: 1.5em;
-    font-family: 'Raleway', sans-serif;
-    padding: 0 10px;
-}
-.modalLogin input[type="email"]{
-    margin: 20px auto 0 auto;
-    display: block;
-    width: 90%;
-}
-.modalLogin input[type="password"]{
-    margin:5px auto 20px auto;
-    display: block;
-    width: 90%;
-}
-.modalLogin input[type="submit"]{
-    display: block;
-    float: right;
-    margin-right: 7px;
-    background-color: lightgray;
-    border: none;
-    padding: 10px 20px;
-}
-.modalLogin input[type="submit"]:hover{
-    background-color: #f44336;
-    color: white;
 }
 footer p{
     font-family: 'Montserrat', sans-serif;
