@@ -46,7 +46,7 @@ function login(btn){
         .then(response => response.json())
         .then(json =>{
             if(json[0] == "ok"){
-                window.location="http://localhost/MinimalBlog/www/adm/index.html"
+                window.location="http://localhost/MinimalBlog/www/adm/index.php"
             }else{
                 alert("Usuário não encontrado");
             }
