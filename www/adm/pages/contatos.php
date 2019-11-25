@@ -1,3 +1,18 @@
+<?php
+    //starting session
+    session_start();
+    //bd import
+    require "pages/config.php";
+
+    if(isset($_SESSION["id"]) && !empty($_SESSION['id'])){
+        $id = addslashes($_SESSION["id"]);
+        $query = "SELECT * FROM users WHERE id = ?";
+        $query = $pdo->prepare($query);
+        $query->execute(array($id));
+
+        if($query->rowCount()>0){
+            $user = $query->fetch();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,8 +31,9 @@
             </div>
             <ul class="menu">
                 <li><a href="../index.php">Home</a></li>
-                <li><a href="">Seo</a></li>
-                <li><a href="">Posts</a></li>
+                <li><a href="seo.php">Seo</a></li>
+                <li><a href="users.php">Seo</a></li>
+                <li><a href="posts.php">Posts</a></li>
                 <li><a href="contatos.php">Contatos</a></li>
             </ul>
             <a href="#" class="user"><img src="../assets/img/sair.png" alt=""></a>
@@ -51,40 +67,66 @@
                         <td>Gustavo Fickert Pessoa</td>
                         <td>gupessoa@live.com</td>
                         <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td>[+ Detalhes]</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
                     </tr> 
                     <tr>
                         <td>Gustavo Fickert Pessoa</td>
                         <td>gupessoa@live.com</td>
                         <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td>[+ Detalhes]</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
                     </tr> 
                     <tr>
                         <td>Gustavo Fickert Pessoa</td>
                         <td>gupessoa@live.com</td>
                         <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td>[+ Detalhes]</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
                     </tr> 
                     <tr>
                         <td>Gustavo Fickert Pessoa</td>
                         <td>gupessoa@live.com</td>
                         <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td>[+ Detalhes]</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
                     </tr>
                     <tr>
                         <td>Gustavo Fickert Pessoa</td>
                         <td>gupessoa@live.com</td>
                         <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td>[+ Detalhes]</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
                     </tr>
                     <tr>
                         <td>Gustavo Fickert Pessoa</td>
                         <td>gupessoa@live.com</td>
                         <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td>[+ Detalhes]</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
+                    </tr>
+                    <tr>
+                        <td>Gustavo Fickert Pessoa</td>
+                        <td>gupessoa@live.com</td>
+                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
+                        <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
+                    </tr>
+                    <tr>
+                        <td>Gustavo Fickert Pessoa</td>
+                        <td>gupessoa@live.com</td>
+                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
+                        <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
+                    </tr>
+                    <tr>
+                        <td>Gustavo Fickert Pessoa</td>
+                        <td>gupessoa@live.com</td>
+                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
+                        <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
                     </tr>
                 </tbody>
             </table>
+            <div class="modal"> 
+                <div class="modalContent">
+                    <span class="closeModal">&times;</span>
+                    <div class="detalhes">
+
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
     <footer>
@@ -96,3 +138,9 @@
     <script type="text/javascript" src="../assets/js/script.js"></script>
 </body>
 </html>
+<?php 
+        }
+    }else{
+        header("Location : ../index.php");
+    }
+?>

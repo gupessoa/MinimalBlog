@@ -27,6 +27,11 @@ let formLogin = document.querySelector(".lgAdmin");
 formLogin.addEventListener("click", (event)=>{
     event.preventDefault();
     toggledisplay(".login");
+    document.addEventListener("click",(event)=>{
+        if(event.target == formLogin){
+            formLogin.style.display="none";
+        }
+    })
 });
 //Login
 function login(btn){

@@ -1,3 +1,18 @@
+<?php
+    //starting session
+    session_start();
+    //bd import
+    require "pages/config.php";
+
+    if(isset($_SESSION["id"]) && !empty($_SESSION['id'])){
+        $id = addslashes($_SESSION["id"]);
+        $query = "SELECT * FROM users WHERE id = ?";
+        $query = $pdo->prepare($query);
+        $query->execute(array($id));
+
+        if($query->rowCount()>0){
+            $user = $query->fetch();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -16,7 +31,8 @@
             </div>
             <ul class="menu">
                 <li><a href="index.php">Home</a></li>
-                <li><a href="">Seo</a></li>
+                <li><a href="pages/seo.php">Seo</a></li>
+                <li><a href="pages/users.php">Seo</a></li>
                 <li><a href="pages/posts.php">Posts</a></li>
                 <li><a href="pages/contatos.php">Contatos</a></li>
             </ul>
@@ -26,7 +42,7 @@
     <main class="container">
         <aside class="perfil">
             <img src="assets/img/calvin_foto.jpg" alt="">
-            <h1>Gustavo Pessoa</h1>
+            <h1><?php echo $user["nome"]; ?></h1>
             <button class="btnPerfil">Editar Perfil</button>
             <fieldset>
                 <legend>Perfil</legend>
@@ -38,7 +54,7 @@
         <section class="content">
             <header>
                 <div class="titulo">
-                    <h1>Hola, Gustavo!</h1>
+                    <h1>Hola, <?php echo $user["nome"]?>!</h1>
                     <h2>Último Login: 20 de Setembro de 2018</h2>
                 </div>
                 <button class="btnReport">Reportar Bug</button>
@@ -59,25 +75,25 @@
                             <td>Gustavo Fickert Pessoa</td>
                             <td>gupessoa@live.com</td>
                             <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                            <td>[+ Detalhes]</td>
+                            <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
                         </tr>
                         <tr>
                             <td>Vanilson Fickert Graciose</td>
                             <td>vfickert@yahoo.com.br</td>
                             <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                            <td>[+ Detalhes]</td>
+                            <td><a href="" class="btnDetalhes" data-tipo="contato">[+ Detalhes]</a></td>
                         </tr>
                         <tr>
                             <td>Gustavo Fickert Pessoa</td>
                             <td>gupessoa@live.com</td>
                             <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                            <td>[+ Detalhes]</td>
+                            <td><a href="" class="btnDetalhes">[+ Detalhes]</a></td>
                         </tr>
                         <tr>
                             <td>Vanilson Fickert Graciose</td>
                             <td>vfickert@yahoo.com.br</td>
                             <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                            <td>[+ Detalhes]</td>
+                            <td><a href="" class="btnDetalhes">[+ Detalhes]</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -97,25 +113,25 @@
                             <td>Pensamentos Soltos</td>
                             <td>Gustavo Fickert Pessoa</td>
                             <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                            <td>[+ Detalhes]</td>
+                            <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
                         </tr>
                         <tr>
                             <td>Manaus - Uma experiência única</td>
                             <td>Vanilson Fickert Graciose</td>
                             <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                            <td>[+ Detalhes]</td>
+                            <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
                         </tr>
                         <tr>
                             <td>More Than Words</td>
                             <td>Gustavo Fickert Pessoa</td>
                             <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                            <td>[+ Detalhes]</td>
+                            <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
                         </tr>
                         <tr>
                             <td>Buenos Aires - Cidade da diversidade</td>
                             <td>Vanilson Fickert Graciose</td>
                             <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                            <td>[+ Detalhes]</td>
+                            <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -123,14 +139,9 @@
             <div class="modal"> 
                 <div class="modalContent">
                     <span class="closeModal">&times;</span>
-                    <form method="post">
-                        <fieldset>
-                            <legend>Login Administração</legend>
-                            <input type="email" name="email" id="email" placeholder="E-mail">
-                            <input type="password" name="senha" id="senha" placeholder="Senha">
-                            <input type="submit" id="logar" value="Entrar">
-                        </fieldset>
-                    </form>
+                    <div class="detalhes">
+
+                    </div>
                 </div>
             </div>
         </section>
@@ -141,6 +152,12 @@
             <p><a href="">Termos Legais</a></p>
         </div>
     </footer>
-    <script type="text/javascript" src="assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
+<?php 
+        }
+    }else{
+        header("Location : ../index.php");
+    }
+?>

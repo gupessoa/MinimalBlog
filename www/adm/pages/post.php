@@ -32,5 +32,6 @@
             <p><a href="">Termos Legais</a></p>
         </div>
     </footer>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>
