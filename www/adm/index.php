@@ -32,7 +32,7 @@
             <ul class="menu">
                 <li><a href="index.php">Home</a></li>
                 <li><a href="pages/seo.php">Seo</a></li>
-                <li><a href="pages/users.php">Seo</a></li>
+                <li><a href="pages/users.php">Usuários</a></li>
                 <li><a href="pages/posts.php">Posts</a></li>
                 <li><a href="pages/contatos.php">Contatos</a></li>
             </ul>
@@ -57,7 +57,7 @@
                     <h1>Hola, <?php echo $user["nome"]?>!</h1>
                     <h2>Último Login: 20 de Setembro de 2018</h2>
                 </div>
-                <button class="btnReport">Reportar Bug</button>
+                <button class="btn">Reportar Bug</button>
             </header>
             <div class="mainContent">
                 <h2>Últimos Contatos</h2>

@@ -2,7 +2,7 @@
     //starting session
     session_start();
     //bd import
-    require "pages/config.php";
+    require "config.php";
 
     if(isset($_SESSION["id"]) && !empty($_SESSION['id'])){
         $id = addslashes($_SESSION["id"]);
@@ -20,8 +20,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/lib/normalize.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/lib/normalize.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 </head>
 <body>
     <header>
@@ -32,15 +32,28 @@
             <ul class="menu">
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="seo.php">Seo</a></li>
-                <li><a href="users.php">Seo</a></li>
+                <li><a href="users.php">Usuários</a></li>
                 <li><a href="posts.php">Posts</a></li>
                 <li><a href="contatos.php">Contatos</a></li>
             </ul>
-            <a href="#" class="user"><img src="assets/img/sair.png" alt=""></a>
+            <a href="#" class="user"><img src="../assets/img/sair.png" alt=""></a>
         </nav>
     </header>
     <main class="container">
+        <aside class="perfil">
+            <img src="../assets/img/calvin_foto.jpg" alt="">
+            <h1>Gustavo Pessoa</h1>
+            <button class="btnPerfil">Editar Perfil</button>
+            <fieldset>
+                <legend>Perfil</legend>
+                <h2>Quem sou eu?</h2>
+                <p>Aqui tem uam pequena descrição sobre quem eu sou na empresa e também 
+                    sobre um pouco do meu lado pessoa.</p>
+            </fieldset>
+        </aside>
+        <section class="content seo">
 
+        </section>
     </main>
     <footer>
         <div class="container">
@@ -48,6 +61,7 @@
             <p><a href="">Termos Legais</a></p>
         </div>
     </footer>
+    <script src="../assets/js/script.js"></script>
 </body>
 </html>
 <?php 

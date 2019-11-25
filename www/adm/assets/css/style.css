@@ -183,12 +183,12 @@ main.container{
     width: 20px;
 }
 .content h1{
-    margin: 0 20px;
+    margin: 0 10px;
     padding: 30px 0;
 }
 .content h2{
     font-size: 1.2em;
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: 20px;
 }
 div.titulo h1{
@@ -201,7 +201,7 @@ div.titulo h2{
     font-weight: normal;
     letter-spacing: 2px;
 }
-.btnReport{
+.btn{
     color: #575757;
     border: none;
     border-radius: 10px;
@@ -211,9 +211,6 @@ div.titulo h2{
     background-color: #f0f0f0;
     margin-right: 30px;
     cursor: pointer;
-}
-.mainContent{
-    padding: 40px 0;
 }
 .tabela{
     width: 100%;
@@ -246,10 +243,10 @@ footer div.container a{
     text-decoration: none;
 }
 /* Contatos.php */
-.contatos, .posts{
+.contatos, .posts,.users{
     padding: 30px 20px;
     width: 100%;
-    min-height: 500pxs;
+    min-height: 660px;
 }
 .contatos h2, .posts h2{
     font-size: 2.5em;
@@ -265,8 +262,8 @@ footer div.container a{
     padding-left: 0;
 }
 /* Posts */
-.posts{
+/* .posts{
     padding: 30px 20px;
     width: 100%;
     min-height: 500pxs;
-}
+} */

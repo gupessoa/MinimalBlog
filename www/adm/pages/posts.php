@@ -2,7 +2,7 @@
     //starting session
     session_start();
     //bd import
-    require "pages/config.php";
+    require "config.php";
 
     if(isset($_SESSION["id"]) && !empty($_SESSION['id'])){
         $id = addslashes($_SESSION["id"]);
@@ -32,7 +32,7 @@
             <ul class="menu">
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="seo.php">Seo</a></li>
-                <li><a href="users.php">Seo</a></li>
+                <li><a href="users.php">Usuários</a></li>
                 <li><a href="posts.php">Posts</a></li>
                 <li><a href="contatos.php">Contatos</a></li>
             </ul>
@@ -51,8 +51,11 @@
                     sobre um pouco do meu lado pessoa.</p>
             </fieldset>
         </aside>
-        <div class="mainContent posts">
-            <h2>Posts</h2>
+        <section class="content posts">
+            <h1>Posts</h1>
+            <div class="containerBtn">
+                <a class="btn" href="">Adicionar Post</a>
+            </div>
             <table class="tabela">
                 <thead>
                     <tr>
@@ -133,7 +136,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
     <footer>
         <div class="container">
