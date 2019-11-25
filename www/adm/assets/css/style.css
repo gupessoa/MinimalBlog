@@ -74,9 +74,6 @@ div.containerBtn button{
     cursor: pointer;
 }
 /* topo */
-header{
-    /* background-color: #2d343c; */
-}
 nav.container{
     background-color: #2d343c;
     justify-content: space-between;
