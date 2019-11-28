@@ -1,7 +1,5 @@
 <?php
-    //starting session
-    session_start();
-    //bd import
+session_start();
     require "config.php";
 
     if(isset($_SESSION["id"]) && !empty($_SESSION['id'])){
@@ -10,8 +8,37 @@
         $query = $pdo->prepare($query);
         $query->execute(array($id));
 
-        if($query->rowCount()>0){
+        if($query->rowCount()>0) {
             $user = $query->fetch();
+        }
+        $content = file_get_contents("php://input");
+        //tranformamos o conteudo recebido em JSON em um array php
+        $decoded = json_decode($content, true);
+        //pegamos as informações e atribuindo elas as variaveis
+        $email = addslashes($decoded['email']);
+        $nome = addslashes($decoded['nome']);
+        $senha = addslashes($decoded['senha']);
+        if(isset($email) && !empty($email)){
+//            //Alterando o cabeçalho para não gerar cache do resultado
+//            header('Cache-Control: no-cache, must-revalidate');
+//            //Alterando o cabeçalho para que o retorno seja do tipo JSON
+//            header('Content-Type: application/json; charset=utf-8');
+            //pegamos as informações e atribuindo elas as variaveis
+            $senha = md5($decoded['senha']);
+            //fazendo os procedimentos no banco de dados
+            $query = "INSERT INTO users SET nome=?, email=?, senha=?";
+            $query = $pdo->prepare($query);
+            $query->execute(array($nome, $email, $senha));
+            if($query->rowCount()>0){
+                $usuario = $query->fetch(PDO::FETCH_ASSOC);
+                $info = $usuario["status"]="ok";
+                echo json_encode($usuario);
+                exit;
+            }else{
+                echo json_encode(array("status"=>"nok"));
+                exit;
+            }
+        }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -54,7 +81,7 @@
         <section class="content users">
             <h1>Usuários</h1>
             <div class="containerBtn">
-                <a class="btn" href="">Adicionar Usuário</a>
+                <a class="btn btnAdd" data-tipo="user" href="">Adicionar Usuário</a>
             </div>
             <table class="tabela">
                 <thead>
@@ -67,73 +94,59 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Era uma vez...</td>
-                        <td>Gustavo Fickert Pessoa</td>
-                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
+                        <td>Felipe</td>
+                        <td>felipe@codnome.com.br</td>
+                        <td>1</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="user">[+ Detalhes]</a></td>
                     </tr> 
                     <tr>
-                        <td>Era uma vez...</td>
-                        <td>Gustavo Fickert Pessoa</td>
-                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
+                        <td>André</td>
+                        <td>andre@codnome.com.br</td>
+                        <td>1</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="user">[+ Detalhes]</a></td>
                     </tr> 
                     <tr>
-                        <td>Era uma vez...</td>
-                        <td>Gustavo Fickert Pessoa</td>
-                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
+                        <td>Gustavo</td>
+                        <td>gustavo.pessoa@codnome.com.br</td>
+                        <td>0</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="user">[+ Detalhes]</a></td>
                     </tr> 
                     <tr>
-                        <td>Era uma vez...</td>
-                        <td>Gustavo Fickert Pessoa</td>
-                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
+                        <td>Vanilson</td>
+                        <td>vanilson@codnome.com.br</td>
+                        <td>2</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="user">[+ Detalhes]</a></td>
                     </tr>
                     <tr>
-                        <td>Era uma vez...</td>
-                        <td>Gustavo Fickert Pessoa</td>
-                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
+                        <td>Felipe</td>
+                        <td>felipe@codnome.com.br</td>
+                        <td>1</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="user">[+ Detalhes]</a></td>
                     </tr>
                     <tr>
-                        <td>Era uma vez...</td>
-                        <td>Gustavo Fickert Pessoa</td>
-                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
+                        <td>André</td>
+                        <td>andre@codnome.com.br</td>
+                        <td>1</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="user">[+ Detalhes]</a></td>
                     </tr>
                     <tr>
-                        <td>Era uma vez...</td>
-                        <td>Gustavo Fickert Pessoa</td>
-                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
+                        <td>Gustavo</td>
+                        <td>gustavo.pessoa@codnome.com.br</td>
+                        <td>0</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="user">[+ Detalhes]</a></td>
                     </tr>
                     <tr>
-                        <td>Era uma vez...</td>
-                        <td>Gustavo Fickert Pessoa</td>
-                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
+                        <td>Vanilson</td>
+                        <td>vanilson@codnome.com.br</td>
+                        <td>2</td>
+                        <td><a href="" class="btnDetalhes" data-tipo="user">[+ Detalhes]</a></td>
                     </tr>
-                    <tr>
-                        <td>Era uma vez...</td>
-                        <td>Gustavo Fickert Pessoa</td>
-                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
-                    </tr>
-                    <tr>
-                        <td>Era uma vez...</td>
-                        <td>Gustavo Fickert Pessoa</td>
-                        <td><time datetime="2018-09-03">03 Set 2018</time></td>
-                        <td><a href="" class="btnDetalhes" data-tipo="post">[+ Detalhes]</a></td>
-                    </tr>
+
                 </tbody>
             </table>
             <div class="modal"> 
                 <div class="modalContent">
-                    <span class="closeModal">&times;</span>
-                    <div class="detalhes">
 
-                    </div>
                 </div>
             </div>
         </section>
@@ -145,11 +158,11 @@
         </div>
     </footer>
     <script src="../assets/js/script.js"></script>
+
 </body>
 </html>
-<?php 
-        }
+<?php
     }else{
-        header("Location : ../index.php");
+           header("Location: http://localhost/MinimalBlog/www/index.php");
     }
 ?>

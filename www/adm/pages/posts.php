@@ -4,14 +4,31 @@
     //bd import
     require "config.php";
 
+    if(isset($_GET['logout'])){
+        session_destroy();
+    }
+
     if(isset($_SESSION["id"]) && !empty($_SESSION['id'])){
         $id = addslashes($_SESSION["id"]);
         $query = "SELECT * FROM users WHERE id = ?";
         $query = $pdo->prepare($query);
         $query->execute(array($id));
 
-        if($query->rowCount()>0){
+        if($query->rowCount()>0) {
             $user = $query->fetch();
+        }
+        $content = file_get_contents("php://input");
+        //tranformamos o conteudo recebido em JSON em um array php
+        $decoded = json_decode($content, true);
+        //pegamos as informações e atribuindo elas as variaveis
+        $titulo = addslashes($decoded['titulo']);
+        $autor = $user['id'];
+        $data = date('d/m/Y');
+        $text = addslashes($decoded['txt']);
+        $hashtags = addslashes($decoded['hashtags']);
+        if(isset($decoded['titulo']) && !empty($decoded['titulo'])){
+            echo'deu certo';
+        }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -54,7 +71,7 @@
         <section class="content posts">
             <h1>Posts</h1>
             <div class="containerBtn">
-                <a class="btn" href="">Adicionar Post</a>
+                <a class="btn btnAdd" href="" data-tipo="post">Adicionar Post</a>
             </div>
             <table class="tabela">
                 <thead>
@@ -148,7 +165,7 @@
 </body>
 </html>
 <?php 
-        }
+
     }else{
         header("Location : ../index.php");
     }

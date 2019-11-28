@@ -13,7 +13,7 @@ body{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 30px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -267,3 +267,27 @@ footer div.container a{
     width: 100%;
     min-height: 500pxs;
 } */
+div.cadastro h2{
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 0 ;
+}
+div.cadastro form{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+div.cadastro input, div.cadastro textarea, div.cadastro label, div.cadastro select{
+    margin: 10px;
+    padding: 10px;
+}
+div.cadastro label{
+    padding: 0;
+}
+div.cadastro input[type='file']{
+    margin: 0;
+}
+div.cadastro input[type='submit']{
+    width: 150px;
+    align-self: flex-end;
+}
